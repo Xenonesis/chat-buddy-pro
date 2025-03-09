@@ -1,0 +1,10 @@
+{
+  "title": "Buddy Chat",
+  "settings": "Paramètres",
+  "search": "Rechercher",
+  "export": "Exporter",
+  "import": "Importer",
+  "clear": "Effacer",
+  "welcomeTitle": "Bienvenue sur Buddy Chat",
+  "welcomeMessage": "Commencez une conversation avec l'un de nos modèles d'IA."
+}

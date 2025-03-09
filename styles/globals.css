@@ -1,0 +1,200 @@
+html,
+body {
+  padding: 0;
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
+    Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
+  transition: background-color 0.5s ease, color 0.5s ease;
+  overscroll-behavior-y: contain;
+  letter-spacing: 0.01em;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+/* Modern scrollbars */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: rgba(0, 0, 0, 0.03);
+  border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgba(0, 112, 243, 0.4);
+  border-radius: 10px;
+  transition: all 0.3s ease;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(0, 112, 243, 0.6);
+}
+
+/* Dark mode scrollbars */
+.dark ::-webkit-scrollbar-track {
+  background: rgba(255, 255, 255, 0.05);
+}
+
+.dark ::-webkit-scrollbar-thumb {
+  background: rgba(0, 166, 255, 0.4);
+}
+
+.dark ::-webkit-scrollbar-thumb:hover {
+  background: rgba(0, 166, 255, 0.6);
+}
+
+/* Enhanced button styles */
+button {
+  font-weight: 500;
+  letter-spacing: 0.01em;
+  position: relative;
+  overflow: hidden;
+}
+
+button::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(rgba(255, 255, 255, 0), rgba(255, 255, 255, 0.2), rgba(255, 255, 255, 0));
+  transform: translateX(-100%) rotate(30deg);
+  transition: transform 0.6s;
+}
+
+button:hover::after {
+  transform: translateX(100%) rotate(30deg);
+}
+
+/* Modern focus states */
+button:focus-visible,
+input:focus-visible,
+select:focus-visible,
+textarea:focus-visible {
+  outline: none;
+  box-shadow: 0 0 0 2px rgba(0, 112, 243, 0.5), 0 0 0 4px rgba(0, 112, 243, 0.2);
+}
+
+.dark button:focus-visible,
+.dark input:focus-visible,
+.dark select:focus-visible,
+.dark textarea:focus-visible {
+  outline: none;
+  box-shadow: 0 0 0 2px rgba(0, 166, 255, 0.5), 0 0 0 4px rgba(0, 166, 255, 0.2);
+}
+
+/* Enhanced selection color */
+::selection {
+  background: rgba(0, 112, 243, 0.2);
+  color: #0070f3;
+}
+
+.dark ::selection {
+  background: rgba(0, 166, 255, 0.2);
+  color: #00a6ff;
+}
+
+/* Support for seamless gradient text */
+.gradient-text {
+  background: linear-gradient(135deg, #0070f3 0%, #0ea5e9 50%, #00a6ff 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  text-fill-color: transparent;
+  background-size: 200% auto;
+  animation: gradientText 3s ease infinite alternate;
+  display: inline-block;
+}
+
+.dark .gradient-text {
+  background: linear-gradient(135deg, #00a6ff 0%, #3b82f6 50%, #74ebd5 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  text-fill-color: transparent;
+  background-size: 200% auto;
+  animation: gradientText 3s ease infinite alternate;
+}
+
+/* Modern animations */
+@keyframes gradientText {
+  0% { background-position: 0% 50%; }
+  100% { background-position: 100% 50%; }
+}
+
+@keyframes floatUp {
+  0% { transform: translateY(10px); opacity: 0; }
+  100% { transform: translateY(0); opacity: 1; }
+}
+
+/* CSS variables for easy theming */
+:root {
+  --primary: #0070f3;
+  --primary-light: #3291ff;
+  --primary-dark: #0761d1;
+  --secondary: #00a6ff;
+  --accent: #10b981;
+  --background-light: #e0eafc;
+  --background-dark: #141e30;
+  --text-light: #2c3e50;
+  --text-dark: #ecf0f1;
+  --surface-light: rgba(255, 255, 255, 0.8);
+  --surface-dark: rgba(30, 40, 60, 0.8);
+  --border-light: rgba(255, 255, 255, 0.7);
+  --border-dark: rgba(255, 255, 255, 0.1);
+  --shadow-light: 0 8px 32px rgba(31, 38, 135, 0.1);
+  --shadow-dark: 0 8px 32px rgba(0, 0, 0, 0.3);
+  --blur: 15px;
+  --radius-sm: 8px;
+  --radius-md: 12px;
+  --radius-lg: 16px;
+  --radius-xl: 20px;
+}
+
+/* Enhanced mobile experience */
+@media (max-width: 768px) {
+  html {
+    font-size: 15px;
+  }
+  
+  button, select, input[type="submit"] {
+    min-height: 44px;
+  }
+  
+  input, textarea, select {
+    font-size: 16px !important;
+  }
+}
+
+/* Fix momentum scrolling for touch devices */
+.scrollContainer {
+  -webkit-overflow-scrolling: touch;
+}
+
+/* Smooth page transitions */
+.page-transition-enter {
+  opacity: 0;
+  transform: translateY(10px);
+}
+
+.page-transition-enter-active {
+  opacity: 1;
+  transform: translateY(0);
+  transition: opacity 300ms, transform 300ms;
+}
+
+.page-transition-exit {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.page-transition-exit-active {
+  opacity: 0;
+  transform: translateY(-10px);
+  transition: opacity 300ms, transform 300ms;
+}
