@@ -84,6 +84,14 @@ import MessageItem from '../components/MessageItem';
 import AnimatedBackground from '../components/AnimatedBackground';
 import MessageSkeleton from '../components/MessageSkeleton';
 
+// Import the new username utilities
+import { getUsername, saveUsername } from '../utils/userStorage';
+import { safeJsonParse } from '../utils/safeJson';
+import { getStorageItem, setStorageItem } from '../utils/localStorage';
+
+// Import SettingsPanel component
+import SettingsPanel from '../components/SettingsPanel';
+
 export default function Home() {
   const [messages, setMessages] = useState<Message[]>([]);
   const [input, setInput] = useState('');
@@ -325,11 +333,6 @@ export default function Home() {
     // Track the question in history
     setQuestionHistory(prev => [...prev, input.trim()]);
 
-    // Haptic feedback for mobile if available
-    if (navigator.vibrate) {
-      navigator.vibrate(50);
-    }
-
     setIsLoading(true);
     const userMessage = { id: Date.now().toString(), role: 'user', content: input, timestamp: Date.now(), model };
     setMessages((prev) => [...prev, userMessage]);
@@ -380,7 +383,19 @@ export default function Home() {
         const errorData = await response.json();
         // Handle specific API key related errors
         if (errorData.requiresApiKey) {
-          throw new Error(t('missingApiKey'));
+          setApiKeyStatus({
+            ...apiKeyStatus,
+            [model]: { isValid: false, message: t('missingApiKey') }
+          });
+          
+          setMessages(prev => [...prev, {
+            id: Date.now().toString(),
+            role: 'assistant',
+            content: `Error: ${t('missingApiKey')}`,
+            timestamp: Date.now(),
+            model
+          }]);
+          return; // Early return - finally block will still execute
         }
         
         if (errorData.invalidApiKey) {
@@ -388,7 +403,15 @@ export default function Home() {
             ...apiKeyStatus,
             [model]: { isValid: false, message: t('invalidApiKey') }
           }); 
-          throw new Error(t('invalidApiKey'));
+          
+          setMessages(prev => [...prev, {
+            id: Date.now().toString(),
+            role: 'assistant',
+            content: `Error: ${t('invalidApiKey')}`,
+            timestamp: Date.now(),
+            model
+          }]);
+          return; // Early return - finally block will still execute
         }
         
         throw new Error(errorData.error || 'Failed to get response');
@@ -458,11 +481,6 @@ export default function Home() {
         model
       }]);
     } finally {
-      // Ensure minimum loading time to prevent UI flicker
-      const processingTime = Date.now() - messageStartTime;
-      if (processingTime < 500) {
-        await new Promise(resolve => setTimeout(resolve, 500 - processingTime));
-      }
       setIsLoading(false);
     }
   };
@@ -1071,7 +1089,7 @@ export default function Home() {
 
   // Check for username on first load and also ensure it integrates well with other settings
   useEffect(() => {
-    const savedUsername = localStorage.getItem('buddychat_username');
+    const savedUsername = getUsername();
     if (savedUsername) {
       setUsername(savedUsername);
     } else {
@@ -1080,16 +1098,11 @@ export default function Home() {
     }
     
     // Also load general settings
-    const savedSettings = localStorage.getItem('chatSettings');
-    if (savedSettings) {
-      try {
-        const parsedSettings = JSON.parse(savedSettings) as Settings;
-        setSettings(parsedSettings);
-        // Also set the model to the default from settings
-        setModel(parsedSettings.defaultModel);
-      } catch (error) {
-        console.error('Error parsing saved settings:', error);
-      }  
+    const settings = getStorageItem('chatSettings');
+    if (settings) {
+      setSettings(settings);
+      // Also set the model to the default from settings
+      setModel(settings.defaultModel);
     } else {
       // If no saved settings, check system theme preference
       const prefersDark = window.matchMedia && 
@@ -1104,7 +1117,7 @@ export default function Home() {
   // Save username to localStorage when changed
   useEffect(() => {
     if (username !== 'User') {
-      localStorage.setItem('buddychat_username', username);
+      saveUsername(username);
     }
   }, [username]);
 
@@ -1115,7 +1128,7 @@ export default function Home() {
     if (trimmedUsername.length > 0) {
       setShowUsernamePrompt(false);
       setUsername(trimmedUsername);
-      localStorage.setItem('buddychat_username', trimmedUsername);
+      saveUsername(trimmedUsername);
     }
   };
 
@@ -1152,13 +1165,8 @@ export default function Home() {
     }
 
     // Load username
-    const savedUsername = loadFromStorage<string>(STORAGE_KEYS.USERNAME, 'User');
-    if (savedUsername !== 'User') {
-      setUsername(savedUsername);
-    } else {
-      // Only show username prompt if we don't have a name yet
-      setShowUsernamePrompt(true);
-    }
+    const savedUsername = getUsername();
+    setUsername(savedUsername);
 
     // Load settings including API keys securely
     const savedSettings = loadFromStorage<Settings | null>(STORAGE_KEYS.SETTINGS, null);
@@ -1417,13 +1425,51 @@ export default function Home() {
     }
   };
 
+  // Add handler functions for SettingsPanel
+  
+  const handleSettingChange = (setting: string, value: any) => {
+    setSettings(prev => {
+      if (setting === 'apiKeys') {
+        return {
+          ...prev,
+          apiKeys: value
+        };
+      }
+      return {
+        ...prev,
+        [setting]: value
+      };
+    });
+  };
+
+  const handleExportChat = () => {
+    exportChat();
+  };
+
+  const handleImportChat = (e: React.ChangeEvent<HTMLInputElement>) => {
+    importChat(e);
+  };
+
+  const handleClearChat = () => {
+    clearChat();
+  };
+
+  const handleClearAllData = () => {
+    if (window.confirm(t('clearAllDataConfirmation'))) {
+      clearAllData();
+    }
+  };
+
   return (
     <div className={`${styles.container} ${styles[settings.theme]}`}>
       <Head>
         <title>Buddy Chat</title>
         <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
         <meta name="theme-color" content={settings.theme === 'dark' ? '#141e30' : '#e0eafc'} />
+        <meta name="mobile-web-app-capable" content="yes" />
         <meta name="apple-mobile-web-app-capable" content="yes" />
+        <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+        <meta name="format-detection" content="telephone=no" />
       </Head>
       
       {/* Username prompt modal */}
@@ -2459,6 +2505,19 @@ export default function Home() {
             </div>
           </div>
         </div>
+      )}
+
+      {showSettings && (
+        <SettingsPanel
+          settings={settings}
+          onSettingChange={handleSettingChange}
+          onClose={() => setShowSettings(false)}
+          onExportChat={handleExportChat}
+          onImportChat={handleImportChat}
+          onClearChat={handleClearChat}
+          onClearAllData={handleClearAllData}
+          currentMessages={messages.length > 0 ? [...messages] : []} 
+        />
       )}
     </div>
   );

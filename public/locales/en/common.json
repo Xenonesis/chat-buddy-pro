@@ -151,5 +151,16 @@
   
   "shortResponses": "Short responses",
   "mediumResponses": "Medium responses",
-  "longResponses": "Detailed responses"
+  "longResponses": "Detailed responses",
+  
+  "edit": "Edit message",
+  "save": "Save",
+  "editedMessage": "Edited",
+  "exportError": "There was an error exporting your chat. Please try again.",
+  "exporting": "Exporting...",
+  "noMessagesToExport": "There are no messages to export. Start a conversation first!",
+  "exportSuccess": "PDF exported successfully!",
+  "exportingProgress": "Exporting... {{progress}}%",
+  "pdfExported": "Your chat has been exported to PDF",
+  "pdfExportFailed": "Failed to export to PDF"
 }

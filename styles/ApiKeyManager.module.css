@@ -1,0 +1,237 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.infoBox {
+  display: flex;
+  align-items: flex-start;
+  background: rgba(0, 112, 243, 0.06);
+  border-left: 3px solid rgba(0, 112, 243, 0.5);
+  padding: 1rem;
+  border-radius: 6px;
+  gap: 0.75rem;
+}
+
+.infoIcon {
+  font-size: 1.25rem;
+  color: #0070f3;
+  margin-top: 0.125rem;
+}
+
+.infoBox p {
+  margin: 0;
+  font-size: 0.95rem;
+  line-height: 1.6;
+}
+
+.keySection {
+  background: rgba(0, 0, 0, 0.02);
+  border-radius: 10px;
+  padding: 1.25rem;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+}
+
+.keyTitle {
+  display: flex;
+  align-items: center;
+  font-size: 1.1rem;
+  margin-top: 0;
+  margin-bottom: 1rem;
+  font-weight: 500;
+}
+
+.modelLogo {
+  font-size: 1.25rem;
+  margin-right: 0.5rem;
+}
+
+.keyInput {
+  position: relative;
+  display: flex;
+}
+
+.keyInput input {
+  flex: 1;
+  padding: 0.75rem 1rem;
+  border: 1px solid #e0e0e0;
+  border-radius: 8px;
+  font-size: 1rem;
+  font-family: monospace;
+  letter-spacing: 1px;
+  transition: all 0.2s;
+  padding-right: 6rem;
+}
+
+.keyInput input:focus {
+  outline: none;
+  border-color: #0070f3;
+  box-shadow: 0 0 0 2px rgba(0, 112, 243, 0.2);
+}
+
+.keyHint {
+  margin-top: 0.5rem;
+  font-size: 0.8rem;
+  color: #666;
+}
+
+.getKeyLink {
+  color: #0070f3;
+  text-decoration: none;
+  border-bottom: 1px dotted;
+  transition: all 0.2s;
+}
+
+.getKeyLink:hover {
+  opacity: 0.8;
+}
+
+.keyControls {
+  position: absolute;
+  right: 0.5rem;
+  top: 50%;
+  transform: translateY(-50%);
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+}
+
+.iconButton {
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0.4rem;
+  color: #666;
+  border-radius: 4px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s;
+}
+
+.iconButton:hover {
+  background: rgba(0, 0, 0, 0.05);
+  color: #333;
+}
+
+.validateButton {
+  background: rgba(0, 112, 243, 0.1);
+  border: 1px solid rgba(0, 112, 243, 0.2);
+  border-radius: 4px;
+  padding: 0.25rem 0.5rem;
+  font-size: 0.75rem;
+  color: #0070f3;
+  cursor: pointer;
+  transition: all 0.2s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.25rem;
+  font-weight: 500;
+}
+
+.validateButton:hover {
+  background: rgba(0, 112, 243, 0.2);
+  border-color: rgba(0, 112, 243, 0.3);
+}
+
+.validIcon {
+  color: #10b981;
+}
+
+.invalidIcon {
+  color: #ef4444;
+}
+
+.spinner {
+  width: 16px;
+  height: 16px;
+  border: 2px solid rgba(0, 112, 243, 0.2);
+  border-top: 2px solid #0070f3;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+.securityNote {
+  margin-top: 1rem;
+  background: rgba(255, 152, 0, 0.06);
+  border-left: 3px solid rgba(255, 152, 0, 0.5);
+  padding: 1rem;
+  border-radius: 6px;
+}
+
+.securityNote p {
+  margin: 0;
+  font-size: 0.85rem;
+  line-height: 1.6;
+  color: #666;
+}
+
+/* Dark theme styles */
+:global(.dark) .infoBox {
+  background: rgba(0, 166, 255, 0.1);
+  border-left-color: rgba(0, 166, 255, 0.5);
+}
+
+:global(.dark) .infoIcon {
+  color: #00a6ff;
+}
+
+:global(.dark) .keySection {
+  background: rgba(255, 255, 255, 0.05);
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
+}
+
+:global(.dark) .keyInput input {
+  background: rgba(30, 41, 59, 0.8);
+  border-color: rgba(255, 255, 255, 0.1);
+  color: #ecf0f1;
+}
+
+:global(.dark) .keyInput input:focus {
+  border-color: #00a6ff;
+  box-shadow: 0 0 0 2px rgba(0, 166, 255, 0.25);
+}
+
+:global(.dark) .keyHint {
+  color: #94a3b8;
+}
+
+:global(.dark) .getKeyLink {
+  color: #00a6ff;
+}
+
+:global(.dark) .iconButton {
+  color: #94a3b8;
+}
+
+:global(.dark) .iconButton:hover {
+  background: rgba(255, 255, 255, 0.1);
+  color: #ecf0f1;
+}
+
+:global(.dark) .validateButton {
+  background: rgba(0, 166, 255, 0.15);
+  border-color: rgba(0, 166, 255, 0.3);
+  color: #00a6ff;
+}
+
+:global(.dark) .validateButton:hover {
+  background: rgba(0, 166, 255, 0.25);
+  border-color: rgba(0, 166, 255, 0.4);
+}
+
+:global(.dark) .securityNote {
+  background: rgba(255, 167, 38, 0.1);
+  border-left-color: rgba(255, 167, 38, 0.5);
+}
+
+:global(.dark) .securityNote p {
+  color: #cbd5e1;
+}

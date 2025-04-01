@@ -1,0 +1,181 @@
+.container {
+  width: 100%;
+  overflow-x: auto;
+  margin-bottom: 1rem;
+  padding-bottom: 0.25rem;
+}
+
+.container::-webkit-scrollbar {
+  height: 4px;
+}
+
+.container::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.container::-webkit-scrollbar-thumb {
+  background: rgba(0, 112, 243, 0.3);
+  border-radius: 4px;
+}
+
+:global(.dark) .container::-webkit-scrollbar-thumb {
+  background: rgba(99, 102, 241, 0.3);
+}
+
+.suggestionsWrapper {
+  display: flex;
+  flex-wrap: nowrap;
+  gap: 0.75rem;
+  padding: 0.25rem 0;
+}
+
+.suggestionButton {
+  background: linear-gradient(135deg, rgba(0, 112, 243, 0.08) 0%, rgba(0, 166, 255, 0.12) 100%);
+  border: none;
+  padding: 0.75rem 1.25rem;
+  border-radius: 20px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-size: 0.9rem;
+  border: 1px solid rgba(0, 112, 243, 0.2);
+  white-space: nowrap;
+  position: relative;
+  overflow: hidden;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+  flex-shrink: 0;
+}
+
+.suggestionButton::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(135deg, rgba(255,255,255,0.2) 0%, rgba(255,255,255,0) 100%);
+  transition: opacity 0.3s ease;
+  opacity: 0;
+}
+
+.suggestionButton:hover::after {
+  opacity: 1;
+}
+
+.suggestionButton:hover {
+  background: linear-gradient(135deg, rgba(0, 112, 243, 0.15) 0%, rgba(0, 166, 255, 0.2) 100%);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 10px rgba(0, 112, 243, 0.1);
+}
+
+.suggestionButton:active {
+  transform: translateY(0);
+}
+
+/* Trending suggestion indicator */
+.trendingSuggestion {
+  border-color: rgba(0, 112, 243, 0.6);
+  background: linear-gradient(135deg, rgba(0, 112, 243, 0.15) 0%, rgba(0, 166, 255, 0.15) 100%);
+  position: relative;
+}
+
+.trendingSuggestion::before {
+  content: '●';
+  color: #0070f3;
+  position: absolute;
+  top: -4px;
+  right: -2px;
+  font-size: 12px;
+  animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+  0% { opacity: 0.5; transform: scale(0.8); }
+  50% { opacity: 1; transform: scale(1.2); }
+  100% { opacity: 0.5; transform: scale(0.8); }
+}
+
+/* Loading state */
+.loadingContainer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.75rem;
+  min-width: 200px;
+  margin: 0 auto;
+}
+
+.loadingDots {
+  display: flex;
+  gap: 6px;
+  align-items: center;
+}
+
+.loadingDots span {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #0070f3;
+  animation: loadingBounce 1.4s infinite ease-in-out both;
+}
+
+.loadingDots span:nth-child(1) {
+  animation-delay: -0.32s;
+}
+
+.loadingDots span:nth-child(2) {
+  animation-delay: -0.16s;
+}
+
+@keyframes loadingBounce {
+  0%, 80%, 100% {
+    transform: scale(0);
+    opacity: 0.5;
+  }
+  40% {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+/* Dark theme styles */
+:global(.dark) .suggestionButton {
+  background: linear-gradient(135deg, rgba(99, 102, 241, 0.1) 0%, rgba(129, 140, 248, 0.1) 100%);
+  border-color: rgba(99, 102, 241, 0.3);
+  color: #ecf0f1;
+}
+
+:global(.dark) .suggestionButton:hover {
+  background: linear-gradient(135deg, rgba(99, 102, 241, 0.2) 0%, rgba(129, 140, 248, 0.2) 100%);
+  box-shadow: 0 4px 12px rgba(79, 70, 229, 0.2);
+}
+
+:global(.dark) .trendingSuggestion {
+  border-color: rgba(99, 102, 241, 0.6);
+  background: linear-gradient(135deg, rgba(99, 102, 241, 0.2) 0%, rgba(129, 140, 248, 0.2) 100%);
+}
+
+:global(.dark) .trendingSuggestion::before {
+  color: #818cf8;
+}
+
+:global(.dark) .loadingDots span {
+  background: #818cf8;
+}
+
+/* Responsive styles */
+@media (max-width: 768px) {
+  .suggestionButton {
+    padding: 0.6rem 1rem;
+    font-size: 0.85rem;
+  }
+  
+  .suggestionsWrapper {
+    padding: 0.125rem 0;
+    margin: 0 -0.5rem;
+    padding: 0 0.5rem;
+  }
+  
+  .container {
+    margin-bottom: 0.75rem;
+  }
+}

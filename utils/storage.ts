@@ -3,6 +3,8 @@
  * Handles saving and loading data with error handling and versioning
  */
 
+import { safeJsonParse } from './safeJson';
+
 // Current storage version - increment when making breaking changes to storage structure
 const STORAGE_VERSION = 1;
 
@@ -119,16 +121,21 @@ export function loadFromStorage<T>(key: string, defaultValue: T): T {
       return defaultValue;
     }
     
+    // Special handling for username key - treat as plain string
+    if (key === STORAGE_KEYS.USERNAME) {
+      return serialized as unknown as T;
+    }
+    
     // Special handling for settings to inject API keys
     if (key === STORAGE_KEYS.SETTINGS) {
       try {
-        const settings = JSON.parse(serialized) as any;
+        const settings = safeJsonParse(serialized, {}) as any;
         
         // If we have stored API keys and settings has apiKeys placeholder
         if (settings && settings.apiKeys) {
           const apiKeysData = localStorage.getItem(STORAGE_KEYS.API_KEYS);
           if (apiKeysData) {
-            const apiKeys = JSON.parse(apiKeysData);
+            const apiKeys = safeJsonParse(apiKeysData, {});
             settings.apiKeys = apiKeys;
           }
         }
@@ -139,7 +146,8 @@ export function loadFromStorage<T>(key: string, defaultValue: T): T {
       }
     }
     
-    return JSON.parse(serialized) as T;
+    // Use safeJsonParse instead of direct JSON.parse
+    return safeJsonParse(serialized, defaultValue);
   } catch (err) {
     console.error(`Error loading from localStorage (${key}):`, err);
     return defaultValue;
@@ -205,7 +213,7 @@ export function initStorage(): void {
     // Handle migration if needed in future versions
     
     // Update version
-    saveToStorage(STORAGE_KEYS.STORAGE_VERSION, STORAGE_VERSION);
+    saveToStorage(STORAGE_KEYS.STORAGE_VERSION, String(STORAGE_VERSION));
   }
 }
 

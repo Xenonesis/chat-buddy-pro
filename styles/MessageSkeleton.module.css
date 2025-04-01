@@ -13,8 +13,8 @@
 }
 
 .dark {
-  background: rgba(30, 40, 60, 0.7);
-  border-color: rgba(255, 255, 255, 0.1);
+  background: rgba(30, 41, 59, 0.7);
+  border-color: rgba(99, 102, 241, 0.15);
   box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
 }
 
@@ -42,9 +42,9 @@
 .dark .skeletonAvatar {
   background: linear-gradient(
     110deg,
-    rgba(60, 70, 90, 0.6) 8%,
-    rgba(70, 80, 100, 0.9) 18%,
-    rgba(60, 70, 90, 0.6) 33%
+    rgba(30, 41, 59, 0.6) 8%,
+    rgba(51, 65, 85, 0.9) 18%,
+    rgba(30, 41, 59, 0.6) 33%
   );
   background-size: 200% 100%;
   animation: shine 1.5s linear infinite;
@@ -67,9 +67,9 @@
 .dark .skeletonName {
   background: linear-gradient(
     110deg,
-    rgba(60, 70, 90, 0.6) 8%,
-    rgba(70, 80, 100, 0.9) 18%,
-    rgba(60, 70, 90, 0.6) 33%
+    rgba(51, 65, 85, 0.6) 8%,
+    rgba(71, 85, 105, 0.9) 18%,
+    rgba(51, 65, 85, 0.6) 33%
   );
 }
 
@@ -95,9 +95,9 @@
 .dark .skeletonLine {
   background: linear-gradient(
     110deg,
-    rgba(60, 70, 90, 0.6) 8%,
-    rgba(70, 80, 100, 0.9) 18%,
-    rgba(60, 70, 90, 0.6) 33%
+    rgba(51, 65, 85, 0.6) 8%,
+    rgba(71, 85, 105, 0.9) 18%,
+    rgba(51, 65, 85, 0.6) 33%
   );
 }
 
@@ -109,7 +109,7 @@
 }
 
 .dark .skeletonCodeBlock {
-  background: rgba(40, 50, 70, 0.3);
+  background: rgba(30, 41, 59, 0.5);
 }
 
 .skeletonCodeHeader {
@@ -118,7 +118,7 @@
 }
 
 .dark .skeletonCodeHeader {
-  background: rgba(40, 50, 70, 0.5);
+  background: rgba(51, 65, 85, 0.5);
 }
 
 .skeletonCodeContent {
@@ -144,9 +144,9 @@
 .dark .skeletonCodeLine {
   background: linear-gradient(
     110deg,
-    rgba(50, 60, 80, 0.6) 8%,
-    rgba(60, 70, 90, 0.9) 18%,
-    rgba(50, 60, 80, 0.6) 33%
+    rgba(71, 85, 105, 0.6) 8%,
+    rgba(99, 102, 241, 0.3) 18%,
+    rgba(71, 85, 105, 0.6) 33%
   );
 }
 
@@ -170,10 +170,11 @@
 .dark .pulseEffect {
   background: linear-gradient(
     90deg,
-    rgba(0, 166, 255, 0),
-    rgba(0, 166, 255, 0.05),
-    rgba(0, 166, 255, 0)
+    rgba(99, 102, 241, 0),
+    rgba(99, 102, 241, 0.07),
+    rgba(99, 102, 241, 0)
   );
+  animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
 }
 
 /* Animations */
@@ -188,6 +189,106 @@
     opacity: 0;
   }
   50% {
+    opacity: 1;
+  }
+}
+
+.skeleton {
+  display: flex;
+  gap: 12px;
+  padding: 16px;
+  margin: 1rem 0;
+  border-radius: 16px;
+  background: rgba(255, 255, 255, 0.7);
+  animation: pulse 2s infinite;
+  max-width: 85%;
+  margin-left: 1rem;
+}
+
+.dark {
+  background: rgba(30, 41, 59, 0.7);
+}
+
+.avatar {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background: rgba(0, 112, 243, 0.15);
+  flex-shrink: 0;
+}
+
+.dark .avatar {
+  background: rgba(99, 102, 241, 0.15);
+}
+
+.content {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+}
+
+.model {
+  width: 80px;
+  height: 14px;
+  border-radius: 4px;
+  background: rgba(0, 0, 0, 0.08);
+}
+
+.dark .model {
+  background: rgba(255, 255, 255, 0.1);
+}
+
+.time {
+  width: 50px;
+  height: 14px;
+  border-radius: 4px;
+  background: rgba(0, 0, 0, 0.05);
+}
+
+.dark .time {
+  background: rgba(255, 255, 255, 0.07);
+}
+
+.lines {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.line {
+  height: 10px;
+  border-radius: 4px;
+  background: rgba(0, 0, 0, 0.06);
+}
+
+.dark .line {
+  background: rgba(255, 255, 255, 0.08);
+}
+
+.typing {
+  margin-top: 4px;
+  font-size: 0.9rem;
+  color: rgba(0, 0, 0, 0.5);
+}
+
+.dark .typing {
+  color: rgba(255, 255, 255, 0.5);
+}
+
+@keyframes pulse {
+  0% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.7;
+  }
+  100% {
     opacity: 1;
   }
 }

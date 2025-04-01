@@ -1,0 +1,46 @@
+.responsiveGrid {
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.gridItem {
+  width: 100%;
+  height: auto;
+  box-sizing: border-box;
+  transition: transform 0.2s ease-in-out;
+}
+
+/* Add subtle animation on hover for interactive grid items */
+@media (hover: hover) {
+  .gridItem:hover {
+    transform: translateY(-2px);
+  }
+}
+
+/* For touch devices, add active state animation instead */
+@media (hover: none) {
+  .gridItem:active {
+    transform: scale(0.98);
+  }
+}
+
+/* For smaller screens, ensure proper spacing */
+@media (max-width: 480px) {
+  .responsiveGrid {
+    gap: 0.75rem !important;
+  }
+}
+
+/* Adjust for portrait vs landscape on mobile */
+@media (max-width: 768px) and (orientation: landscape) {
+  .responsiveGrid {
+    grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)) !important;
+  }
+}
+
+/* Fix for iOS Safari 100vh issue */
+@supports (padding: max(0px)) {
+  .responsiveGrid {
+    padding-bottom: max(1rem, env(safe-area-inset-bottom));
+  }
+}

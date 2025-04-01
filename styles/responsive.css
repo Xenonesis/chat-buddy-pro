@@ -1,0 +1,700 @@
+/* Enhanced responsive styles */
+
+/* Base mobile styles - Small phones (up to 480px) */
+@media (max-width: 480px) {
+  .container {
+    padding: 0.75rem 0.5rem !important;
+  }
+  
+  .header {
+    padding: 0.8rem !important;
+    margin-bottom: 0.75rem !important;
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+  
+  .header h1 {
+    font-size: 1.4rem !important;
+  }
+  
+  .logoSection {
+    width: 100%;
+    justify-content: center;
+    margin-bottom: 0.5rem;
+  }
+  
+  .beta {
+    padding: 0.15rem 0.3rem !important;
+    font-size: 0.7rem !important;
+  }
+  
+  .headerControls {
+    width: 100%;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 0.5rem !important;
+  }
+  
+  .modelSelect {
+    padding: 0.4rem 0.6rem !important;
+    font-size: 0.9rem !important;
+    max-width: 120px;
+  }
+  
+  .chatContainer {
+    padding: 0.7rem !important;
+    margin-bottom: 0.75rem !important;
+    max-height: calc(100vh - 280px) !important;
+  }
+
+  .message {
+    max-width: 95% !important;
+    margin: 0.75rem 0 !important;
+  }
+  
+  .messageHeader {
+    padding: 0.6rem 0.75rem 0.25rem !important;
+    flex-wrap: wrap;
+  }
+  
+  .messageContent {
+    width: 100%;
+  }
+  
+  .textContent {
+    padding: 0.5rem 0.75rem 0.75rem !important;
+    font-size: 0.9rem !important;
+    word-break: break-word;
+  }
+  
+  .inputForm {
+    padding: 0.6rem !important;
+    gap: 0.3rem !important;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    border-radius: 0 !important;
+    border-left: none !important;
+    border-right: none !important;
+    border-bottom: none !important;
+    z-index: 10;
+  }
+  
+  .inputField {
+    padding: 0.6rem !important;
+    font-size: 0.95rem !important;
+  }
+  
+  .settingsPanel {
+    padding: 0.75rem !important;
+    max-height: 85vh;
+    overflow-y: auto;
+    margin: 0 0 1rem !important;
+    width: calc(100% - 1rem) !important;
+    max-width: none !important;
+  }
+  
+  .suggestions {
+    margin-bottom: 4.5rem !important;
+    padding: 0.3rem !important;
+    overflow-x: auto;
+    white-space: nowrap;
+    justify-content: flex-start;
+    flex-wrap: nowrap;
+  }
+  
+  .suggestionButton {
+    padding: 0.5rem 0.75rem !important;
+    font-size: 0.8rem !important;
+    flex-shrink: 0;
+  }
+  
+  .chatActions {
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+  
+  .chatActions > div {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 0.25rem;
+  }
+  
+  .actionText {
+    display: none;
+  }
+  
+  .actionButton {
+    padding: 0.5rem !important;
+    width: auto !important;
+    min-width: 42px;
+    min-height: 42px;
+  }
+  
+  .iconButton {
+    min-width: 42px;
+  }
+  
+  .settingsTabs {
+    overflow-x: auto;
+    flex-wrap: nowrap;
+    justify-content: flex-start;
+    padding-bottom: 0.75rem;
+    gap: 0.25rem !important;
+  }
+  
+  .tabButton {
+    padding: 0.5rem 0.75rem !important;
+    font-size: 0.85rem !important;
+    white-space: nowrap;
+    min-width: auto !important;
+  }
+  
+  .settingItem {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.5rem;
+  }
+  
+  .settingItem select,
+  .settingItem input[type="range"] {
+    width: 100% !important;
+  }
+  
+  .apiKeyInput {
+    width: 100% !important;
+  }
+  
+  .chatModeOptions {
+    width: 240px !important;
+    right: -70px;
+    max-width: 90vw;
+  }
+  
+  .chatModeDetails {
+    max-width: 150px;
+  }
+  
+  .quickCommandsContainer {
+    padding: 0.75rem !important;
+    margin-bottom: 4.5rem !important;
+  }
+  
+  .quickCommandsList {
+    grid-template-columns: 1fr !important;
+    max-height: 300px;
+    overflow-y: auto;
+  }
+  
+  /* Modal adjustments */
+  .feedbackModal, 
+  .usernamePrompt,
+  .modalContent {
+    width: 90% !important;
+    padding: 1rem !important;
+  }
+  
+  .modalStep {
+    padding: 1.5rem 1rem !important;
+  }
+  
+  .modalStep h2 {
+    font-size: 1.6rem !important;
+  }
+  
+  .modalStep p {
+    font-size: 1rem !important;
+    margin-bottom: 1.5rem !important;
+  }
+  
+  .feedbackOptions {
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+  
+  .feedbackOption {
+    width: 100%;
+  }
+  
+  .shortcuts {
+    margin-bottom: 4rem !important;
+  }
+  
+  /* Fix for iOS Safari notch */
+  @supports (padding: max(0px)) {
+    .container {
+      padding-left: max(0.75rem, env(safe-area-inset-left));
+      padding-right: max(0.75rem, env(safe-area-inset-right));
+      padding-bottom: max(4.5rem, env(safe-area-inset-bottom));
+    }
+    
+    .inputForm {
+      padding-bottom: max(0.6rem, env(safe-area-inset-bottom));
+    }
+  }
+}
+
+/* Medium phones (480px to 640px) */
+@media (min-width: 481px) and (max-width: 640px) {
+  .container {
+    padding: 1rem 0.75rem;
+  }
+  
+  .header {
+    flex-direction: column;
+    align-items: center;
+    padding: 1rem;
+    margin-bottom: 0.75rem;
+  }
+  
+  .headerControls {
+    width: 100%;
+    justify-content: center;
+    margin-top: 0.5rem;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+  }
+  
+  .actionText {
+    display: none;
+  }
+  
+  .settingItem {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.5rem;
+  }
+  
+  .chatModesSettings {
+    grid-template-columns: 1fr !important;
+  }
+  
+  .inputForm {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    border-radius: 0 !important;
+    border-left: none !important;
+    border-right: none !important;
+    border-bottom: none !important;
+    padding: 0.8rem !important;
+    z-index: 10;
+  }
+  
+  .suggestions {
+    margin-bottom: 5rem !important;
+  }
+  
+  .shortcuts {
+    margin-bottom: 4rem !important;
+  }
+
+  /* Adjust for iOS notch */
+  @supports (padding: max(0px)) {
+    .container {
+      padding-bottom: max(4.5rem, env(safe-area-inset-bottom));
+    }
+    
+    .inputForm {
+      padding-bottom: max(0.8rem, env(safe-area-inset-bottom));
+    }
+  }
+}
+
+/* Tablets (641px to 1024px) */
+@media (min-width: 641px) and (max-width: 1024px) {
+  .container {
+    padding: 1.25rem;
+  }
+  
+  .header {
+    padding: 1.25rem;
+  }
+  
+  .message {
+    max-width: 90%;
+  }
+  
+  .inputForm {
+    padding: 1rem;
+  }
+  
+  .quickCommandsList {
+    grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)) !important;
+  }
+  
+  .settingsPanel {
+    width: 90%;
+    margin: 0 auto 1.5rem;
+  }
+  
+  /* iPad-specific adjustments */
+  @media (min-width: 768px) and (max-width: 1024px) {
+    .chatContainer {
+      max-height: calc(100vh - 340px);
+    }
+    
+    .inputForm {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      border-radius: 0 !important;
+      border-left: none !important;
+      border-right: none !important;
+      border-bottom: none !important;
+      padding: 1rem 1.25rem !important;
+      z-index: 10;
+    }
+    
+    .suggestions {
+      margin-bottom: 5.5rem !important;
+    }
+    
+    .shortcuts {
+      margin-bottom: 5rem !important;
+    }
+    
+    @supports (padding: max(0px)) {
+      .container {
+        padding-bottom: max(5.5rem, env(safe-area-inset-bottom));
+      }
+      
+      .inputForm {
+        padding-bottom: max(1rem, env(safe-area-inset-bottom)) !important;
+      }
+    }
+  }
+}
+
+/* Landscape mode for mobile devices */
+@media (max-height: 500px) and (orientation: landscape) {
+  .header {
+    padding: 0.75rem !important;
+    margin-bottom: 0.75rem !important;
+    flex-direction: row !important;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+  }
+  
+  .logoSection {
+    width: auto !important;
+    margin-bottom: 0 !important;
+  }
+  
+  .chatContainer {
+    max-height: calc(100vh - 180px) !important;
+    margin-bottom: 0.75rem !important;
+  }
+  
+  .message {
+    margin: 0.75rem 0 !important;
+  }
+  
+  .inputForm {
+    position: relative !important;
+    border-radius: 16px !important;
+    border: 1px solid rgba(255, 255, 255, 0.8) !important;
+  }
+  
+  .suggestions {
+    margin-bottom: 0.75rem !important;
+  }
+  
+  .shortcuts {
+    margin-bottom: 0.5rem !important;
+  }
+  
+  .settingsPanel {
+    max-height: 80vh;
+    overflow-y: auto;
+  }
+  
+  .modalContent {
+    max-height: 85vh;
+    overflow-y: auto;
+    padding: 1.25rem !important;
+  }
+  
+  .onboardingModal .modalStep {
+    padding: 1rem 1.25rem !important;
+  }
+  
+  .modalButtons {
+    margin-top: 0.75rem !important;
+  }
+  
+  .quickCommandsList {
+    max-height: 200px !important;
+  }
+  
+  .themeSwitcher.mobileOnly {
+    bottom: 10px !important;
+    right: 10px !important;
+    width: 36px !important;
+    height: 36px !important;
+  }
+}
+
+/* High DPI displays */
+@media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
+  .textContent,
+  .inputField {
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+  
+  .textContent code {
+    font-size: 0.95em;
+  }
+}
+
+/* Larger desktop screens (1025px and above) */
+@media (min-width: 1025px) {
+  .container {
+    max-width: 1400px;
+    margin: 0 auto;
+  }
+  
+  .chatContainer {
+    min-height: 60vh;
+  }
+  
+  .settingsPanel {
+    max-width: 800px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  
+  /* Ultra-wide optimization */
+  @media (min-width: 1600px) {
+    .container {
+      max-width: 1600px;
+    }
+    
+    .chatContainer {
+      max-width: 1200px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+    
+    .inputForm {
+      max-width: 1200px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+  }
+}
+
+/* Touch-specific optimizations */
+@media (hover: none) {
+  .actionButton,
+  .settingItem,
+  .tabButton,
+  .message,
+  .suggestionButton,
+  .quickCommandCard,
+  .modalButtons button,
+  .chatModeOption {
+    cursor: default;
+  }
+  
+  .actionButton:active,
+  .tabButton:active,
+  .suggestionButton:active,
+  .quickCommandCard:active,
+  .modalButtons button:active {
+    transform: scale(0.98);
+  }
+  
+  /* Increase tap target sizes */
+  .inputForm button,
+  .actionButton,
+  .clearApiKey,
+  .apiKeyVisibilityBtn,
+  .closeButton,
+  .reactionButton {
+    min-height: 42px;
+    min-width: 42px;
+  }
+  
+  /* Add extra padding for better touch targets */
+  .inputField {
+    padding-top: 0.7rem !important;
+    padding-bottom: 0.7rem !important;
+  }
+  
+  /* Fix for iOS Safari 100vh issue */
+  .container {
+    min-height: -webkit-fill-available;
+  }
+  
+  /* Enlarge interactive elements for better touch accuracy */
+  .settingsTabs {
+    padding-bottom: 0.5rem;
+  }
+  
+  .tabButton {
+    padding: 0.6rem 1rem;
+    min-height: 44px;
+  }
+  
+  .copyButton {
+    min-height: 34px;
+    min-width: 34px;
+  }
+  
+  /* Message action buttons require larger tap targets */
+  .messageActions {
+    padding: 0.5rem;
+    gap: 0.75rem;
+  }
+  
+  .messageActions button {
+    min-height: 40px;
+    min-width: 40px;
+  }
+}
+
+/* Dark mode preference */
+@media (prefers-color-scheme: dark) {
+  .system {
+    background: linear-gradient(135deg, #141e30 0%, #243b55 100%) !important;
+    color: #ecf0f1 !important;
+  }
+  
+  .system .header,
+  .system .chatContainer,
+  .system .inputForm,
+  .system .settingsPanel {
+    background: rgba(20, 30, 48, 0.9) !important;
+    border-color: rgba(255, 255, 255, 0.1) !important;
+  }
+}
+
+/* Print styles */
+@media print {
+  .chatContainer {
+    height: auto !important;
+    overflow: visible !important;
+  }
+  
+  .header,
+  .inputForm,
+  .suggestions,
+  .chatActions,
+  .themeSwitcher {
+    display: none !important;
+  }
+  
+  .message {
+    page-break-inside: avoid;
+    break-inside: avoid;
+  }
+  
+  .container {
+    padding: 0 !important;
+    background: white !important;
+  }
+  
+  body {
+    background: white !important;
+  }
+  
+  .messageHeader {
+    color: #333 !important;
+  }
+  
+  .textContent {
+    color: black !important;
+  }
+  
+  .textContent a {
+    text-decoration: underline !important;
+    color: blue !important;
+  }
+  
+  .textContent pre {
+    border: 1px solid #ccc !important;
+    white-space: pre-wrap !important;
+  }
+}
+
+/* Foldable devices and dual screens */
+@media (screen-spanning: single-fold-vertical) {
+  .chatContainer {
+    margin-right: env(fold-width);
+  }
+}
+
+/* For ultra-wide screens */
+@media (min-width: 1800px) {
+  .container {
+    max-width: 1600px;
+  }
+  
+  .chatContainer {
+    max-width: 1400px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  
+  /* Add a maximum width to messages to maintain readability */
+  .message {
+    max-width: 70%;
+  }
+  
+  .inputForm {
+    max-width: 1400px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  
+  .settingsPanel {
+    max-width: 1000px;
+  }
+}
+
+/* Accessibility improvements for motion sensitivity */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* Base responsive class for fixed elements */
+.fixedBottom {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 10;
+}
+
+/* Helper class for adjusting content with fixed elements */
+.withFixedBottom {
+  margin-bottom: 5rem !important;
+  padding-bottom: 1rem;
+}
+
+/* Class for horizontal scrolling with momentum */
+.horizontalScroll {
+  overflow-x: auto;
+  overflow-y: hidden;
+  white-space: nowrap;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none; /* Firefox */
+  -ms-overflow-style: none; /* IE/Edge */
+}
+
+.horizontalScroll::-webkit-scrollbar {
+  display: none; /* Chrome/Safari/Opera */
+}

@@ -36,15 +36,15 @@ body {
 
 /* Dark mode scrollbars */
 .dark ::-webkit-scrollbar-track {
-  background: rgba(255, 255, 255, 0.05);
+  background: rgba(30, 41, 59, 0.2);
 }
 
 .dark ::-webkit-scrollbar-thumb {
-  background: rgba(0, 166, 255, 0.4);
+  background: rgba(99, 102, 241, 0.4);
 }
 
 .dark ::-webkit-scrollbar-thumb:hover {
-  background: rgba(0, 166, 255, 0.6);
+  background: rgba(129, 140, 248, 0.6);
 }
 
 /* Enhanced button styles */
@@ -62,13 +62,14 @@ button::after {
   left: 0;
   width: 100%;
   height: 100%;
-  background: linear-gradient(rgba(255, 255, 255, 0), rgba(255, 255, 255, 0.2), rgba(255, 255, 255, 0));
-  transform: translateX(-100%) rotate(30deg);
-  transition: transform 0.6s;
+  background: linear-gradient(rgba(255, 255, 255, 0), rgba(255, 255, 255, 0.3), rgba(255, 255, 255, 0));
+  transform: translateX(-100%) rotate(20deg);
+  transition: transform 0.8s cubic-bezier(0.165, 0.84, 0.44, 1);
+  pointer-events: none;
 }
 
 button:hover::after {
-  transform: translateX(100%) rotate(30deg);
+  transform: translateX(100%) rotate(20deg);
 }
 
 /* Modern focus states */
@@ -77,7 +78,8 @@ input:focus-visible,
 select:focus-visible,
 textarea:focus-visible {
   outline: none;
-  box-shadow: 0 0 0 2px rgba(0, 112, 243, 0.5), 0 0 0 4px rgba(0, 112, 243, 0.2);
+  box-shadow: 0 0 0 3px rgba(0, 112, 243, 0.25), 0 0 0 5px rgba(0, 112, 243, 0.1);
+  transition: box-shadow 0.2s ease-out;
 }
 
 .dark button:focus-visible,
@@ -85,7 +87,7 @@ textarea:focus-visible {
 .dark select:focus-visible,
 .dark textarea:focus-visible {
   outline: none;
-  box-shadow: 0 0 0 2px rgba(0, 166, 255, 0.5), 0 0 0 4px rgba(0, 166, 255, 0.2);
+  box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.25), 0 0 0 5px rgba(99, 102, 241, 0.1);
 }
 
 /* Enhanced selection color */
@@ -95,8 +97,8 @@ textarea:focus-visible {
 }
 
 .dark ::selection {
-  background: rgba(0, 166, 255, 0.2);
-  color: #00a6ff;
+  background: rgba(99, 102, 241, 0.3);
+  color: #a5b4fc;
 }
 
 /* Support for seamless gradient text */
@@ -112,7 +114,7 @@ textarea:focus-visible {
 }
 
 .dark .gradient-text {
-  background: linear-gradient(135deg, #00a6ff 0%, #3b82f6 50%, #74ebd5 100%);
+  background: linear-gradient(135deg, #818cf8 0%, #a5b4fc 50%, #c7d2fe 100%);
   -webkit-background-clip: text;
   background-clip: text;
   -webkit-text-fill-color: transparent;
@@ -132,6 +134,25 @@ textarea:focus-visible {
   100% { transform: translateY(0); opacity: 1; }
 }
 
+/* Modern gradient animations */
+@keyframes softGradientShift {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+.gradient-bg {
+  background: linear-gradient(270deg, #0070f3, #00a6ff, #0ea5e9);
+  background-size: 200% 200%;
+  animation: softGradientShift 8s ease infinite;
+}
+
+.dark .gradient-bg {
+  background: linear-gradient(270deg, #6366f1, #818cf8, #a5b4fc);
+  background-size: 200% 200%;
+  animation: softGradientShift 8s ease infinite;
+}
+
 /* CSS variables for easy theming */
 :root {
   --primary: #0070f3;
@@ -140,20 +161,40 @@ textarea:focus-visible {
   --secondary: #00a6ff;
   --accent: #10b981;
   --background-light: #e0eafc;
-  --background-dark: #141e30;
+  --background-dark: #111827;
   --text-light: #2c3e50;
-  --text-dark: #ecf0f1;
+  --text-dark: #f1f5f9;
   --surface-light: rgba(255, 255, 255, 0.8);
-  --surface-dark: rgba(30, 40, 60, 0.8);
+  --surface-dark: rgba(30, 41, 59, 0.8);
   --border-light: rgba(255, 255, 255, 0.7);
-  --border-dark: rgba(255, 255, 255, 0.1);
+  --border-dark: rgba(99, 102, 241, 0.2);
   --shadow-light: 0 8px 32px rgba(31, 38, 135, 0.1);
-  --shadow-dark: 0 8px 32px rgba(0, 0, 0, 0.3);
+  --shadow-dark: 0 8px 32px rgba(0, 0, 0, 0.35);
   --blur: 15px;
   --radius-sm: 8px;
   --radius-md: 12px;
   --radius-lg: 16px;
   --radius-xl: 20px;
+  
+  /* Add dark mode indigo theme variables */
+  --indigo-100: #e0e7ff;
+  --indigo-200: #c7d2fe;
+  --indigo-300: #a5b4fc;
+  --indigo-400: #818cf8;
+  --indigo-500: #6366f1;
+  --indigo-600: #4f46e5;
+  --indigo-700: #4338ca;
+  --indigo-800: #3730a3;
+  --indigo-900: #312e81;
+  
+  /* Enhanced dark mode colors */
+  --dark-bg-primary: #0f172a;
+  --dark-bg-secondary: #1e293b;
+  --dark-bg-tertiary: #334155;
+  --dark-accent-primary: #818cf8;
+  --dark-accent-secondary: #a5b4fc;
+  --dark-text-primary: #f8fafc;
+  --dark-text-secondary: #cbd5e1;
 }
 
 /* Enhanced mobile experience */
@@ -197,4 +238,38 @@ textarea:focus-visible {
   opacity: 0;
   transform: translateY(-10px);
   transition: opacity 300ms, transform 300ms;
+}
+
+/* Support for dark mode preference */
+@media (prefers-color-scheme: dark) {
+  .system {
+    background: linear-gradient(135deg, #0f172a 0%, #1e293b 50%, #293548 100%);
+    color: var(--dark-text-primary);
+  }
+  
+  .system .header,
+  .system .chatContainer,
+  .system .inputForm {
+    background: rgba(30, 41, 59, 0.85);
+    border-color: rgba(99, 102, 241, 0.2);
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.35);
+  }
+  
+  .system .timestamp {
+    color: var(--dark-text-secondary);
+    background-color: rgba(255, 255, 255, 0.06);
+    border-color: rgba(255, 255, 255, 0.08);
+  }
+  
+  .system .timestamp .relativeTime {
+    color: var(--dark-text-secondary);
+  }
+  
+  .system .timestamp .numericalTime {
+    color: var(--dark-accent-secondary);
+  }
+  
+  .system .timestamp:hover {
+    background-color: rgba(255, 255, 255, 0.12);
+  }
 }

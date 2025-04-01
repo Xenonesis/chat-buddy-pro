@@ -67,7 +67,7 @@ const AnimatedBackground: React.FC<AnimatedBackgroundProps> = ({ theme }) => {
             
             ctx.beginPath();
             ctx.strokeStyle = theme === 'dark' 
-              ? `rgba(0, 166, 255, ${opacity * 0.15})` 
+              ? `rgba(129, 140, 248, ${opacity * 0.15})` 
               : `rgba(0, 112, 243, ${opacity * 0.1})`;
             ctx.lineWidth = 1;
             ctx.moveTo(p1.x, p1.y);
@@ -136,7 +136,12 @@ class Particle {
     
     // Different colors based on theme
     if (this.theme === 'dark') {
-      this.ctx.fillStyle = `rgba(0, 166, 255, ${Math.random() * 0.2 + 0.1})`;
+      // Enhanced indigo color palette for dark mode
+      const hue = 235 + (Math.random() * 15); // Range around indigo hue
+      const sat = 70 + (Math.random() * 20);
+      const light = 70 + (Math.random() * 15);
+      const alpha = Math.random() * 0.2 + 0.1;
+      this.ctx.fillStyle = `hsla(${hue}, ${sat}%, ${light}%, ${alpha})`;
     } else {
       this.ctx.fillStyle = `rgba(0, 112, 243, ${Math.random() * 0.15 + 0.05})`;
     }
