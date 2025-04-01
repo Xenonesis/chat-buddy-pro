@@ -2273,107 +2273,97 @@ export default function Home() {
       <div className={styles.suggestions}>
         <AnimatePresence mode="wait">
           {dynamicSuggestions.map((suggestion, index) => (
-            <motion.button
+            <button
               key={suggestion}
               onClick={() => handleSuggestionClick(suggestion)}
               className={`${styles.suggestionButton} ${
                 suggestion === trendingSuggestion ? styles.trendingSuggestion : ''
               }`}
-              whileHover={{ scale: 1.03 }}
-              whileTap={{ scale: 0.98 }}
-              initial={{ opacity: 0, y: 10 }}
-              animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, scale: 0.9 }}
-              transition={{ duration: 0.2, delay: index * 0.05 }}
             >
               {suggestion}
-            </motion.button>
+            </button>
           ))}
-          <motion.button 
+          <button 
             className={styles.suggestionButton}
             onClick={() => setShowImageGen(true)}
-            whileHover={{ scale: 1.03 }}
-            whileTap={{ scale: 0.98 }}
           >
             <FiImage /> {t('generateImage')}
-          </motion.button>
+          </button>
         </AnimatePresence>
       </div>
 
-      <motion.form 
-        onSubmit={sendMessage} 
-        className={`${styles.inputForm} ${inputFocused ? styles.inputFormFocused : ''}`}
-        animate={{ scale: isLoading ? 0.98 : 1 }}
-        transition={{ duration: 0.2 }}
-      >
-        <button
-          type="button"
-          onClick={startVoiceInput}
-          className={`${styles.voiceButton} ${isRecording ? styles.recording : ''}`}
+      <div className={`${styles.inputFormContainer}`}>
+        <form 
+          onSubmit={sendMessage} 
+          className={`${styles.inputForm} ${inputFocused ? styles.inputFormFocused : ''}`}
         >
-          <FiMic />
-        </button>
-        <input
-          ref={inputRef}
-          type="text"
-          value={input}
-          onChange={(e) => setInput(e.target.value)}
-          onFocus={() => setInputFocused(true)}
-          onBlur={() => setInputFocused(false)}
-          placeholder={isLoading ? "Waiting for response..." : t('askAnything')}
-          disabled={isLoading}
-          className={`${styles.inputField} ${isLoading ? styles.inputDisabled : ''}`}
-          style={{ fontSize: `${settings.fontSize}px` }}
-          onKeyDown={(e) => {
-            if (e.key === 'Enter' && settings.sendWithEnter && !e.shiftKey) {
-              e.preventDefault();
-              sendMessage(e);
-            }
-            if (e.key === '/' && !input && !showQuickCommands) {
-              e.preventDefault();
-              setShowQuickCommands(true);
-            }
-          }}
-        />
-        <button 
-          type="button"
-          onClick={toggleQuickCommands}
-          className={`${styles.quickCommandButton} ${showQuickCommands ? styles.active : ''}`}
-          title={t('quickCommands')}
-        >
-          <FiCommand />
-        </button>
-        <button 
-          type="button"
-          onClick={() => document.getElementById('file-upload')?.click()}
-          disabled={isLoading}
-          className={styles.attachButton}
-        >
-          <FiPaperclip />
-          <input 
-            id="file-upload"
-            type="file"
-            onChange={handleFileChange}
-            style={{ display: 'none' }}
+          <button
+            type="button"
+            onClick={startVoiceInput}
+            className={`${styles.voiceButton} ${isRecording ? styles.recording : ''}`}
+          >
+            <FiMic />
+          </button>
+          <input
+            ref={inputRef}
+            type="text"
+            value={input}
+            onChange={(e) => setInput(e.target.value)}
+            onFocus={() => setInputFocused(true)}
+            onBlur={() => setInputFocused(false)}
+            placeholder={isLoading ? "Waiting for response..." : t('askAnything')}
+            disabled={isLoading}
+            className={`${styles.inputField} ${isLoading ? styles.inputDisabled : ''}`}
+            style={{ fontSize: `${settings.fontSize}px` }}
+            onKeyDown={(e) => {
+              if (e.key === 'Enter' && settings.sendWithEnter && !e.shiftKey) {
+                e.preventDefault();
+                sendMessage(e);
+              }
+              if (e.key === '/' && !input && !showQuickCommands) {
+                e.preventDefault();
+                setShowQuickCommands(true);
+              }
+            }}
           />
-        </button>
-        <motion.button 
-          type="submit" 
-          disabled={isLoading || (!input.trim() && !file)}
-          whileTap={{ scale: 0.9 }}
-          whileHover={{ scale: 1.05 }}
-        >
-          {isLoading ? (
-            <div className={styles.loadingDots}>
-              <span></span>
-              <span></span>
-              <span></span>
-            </div>
-          ) : (
-            <FiSend />
-          )}
-        </motion.button>
-      </motion.form>
+          <button 
+            type="button"
+            onClick={toggleQuickCommands}
+            className={`${styles.quickCommandButton} ${showQuickCommands ? styles.active : ''}`}
+            title={t('quickCommands')}
+          >
+            <FiCommand />
+          </button>
+          <button 
+            type="button"
+            onClick={() => document.getElementById('file-upload')?.click()}
+            disabled={isLoading}
+            className={styles.attachButton}
+          >
+            <FiPaperclip />
+            <input 
+              id="file-upload"
+              type="file"
+              onChange={handleFileChange}
+              style={{ display: 'none' }}
+            />
+          </button>
+          <button 
+            type="submit" 
+            disabled={isLoading || (!input.trim() && !file)}
+          >
+            {isLoading ? (
+              <div className={styles.loadingDots}>
+                <span></span>
+                <span></span>
+                <span></span>
+              </div>
+            ) : (
+              <FiSend />
+            )}
+          </button>
+        </form>
+      </div>
 
       {file && (
         <div className={styles.fileAttachment}>
@@ -2442,15 +2432,13 @@ export default function Home() {
         </div>
       )}
 
-      <motion.button 
+      <button 
         onClick={toggleTheme} 
         className={`${styles.themeSwitcher} ${styles.mobileOnly}`}
         aria-label={settings.theme === 'light' ? 'Switch to dark mode' : 'Switch to light mode'}
-        whileHover={{ scale: 1.1, rotate: 15 }}
-        whileTap={{ scale: 0.9 }}
       >
         {settings.theme === 'light' ? <FiMoon /> : <FiSun />}
-      </motion.button>
+      </button>
 
       {/* Feedback Modal */}
       {showFeedbackModal && (

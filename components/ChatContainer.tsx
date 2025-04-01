@@ -15,9 +15,10 @@ interface ChatContainerProps {
     autoScroll: boolean;
     fontSize: number;
   };
+  onSettingChange?: (key: string, value: any) => void;
 }
 
-const ChatContainer: React.FC<ChatContainerProps> = ({ settings }) => {
+const ChatContainer: React.FC<ChatContainerProps> = ({ settings, onSettingChange }) => {
   const { t } = useTranslation('common');
   const { 
     messages, 

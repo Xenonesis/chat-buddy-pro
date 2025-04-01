@@ -243,7 +243,7 @@ const DataManagement: React.FC<DataManagementProps> = ({
           yPos = 20;
           
           // Add subtle page number at bottom
-          const pageNumber = doc.internal.getNumberOfPages();
+          const pageNumber = doc.getNumberOfPages();
           doc.setFontSize(8);
           doc.setTextColor(150, 150, 150);
           doc.text(`Page ${pageNumber}`, pageWidth / 2, doc.internal.pageSize.getHeight() - 10, { align: 'center' });

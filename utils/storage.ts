@@ -18,7 +18,9 @@ export const STORAGE_KEYS = {
   THEME: 'buddychat_theme',
   ONBOARDING: 'buddychat_hasSeenOnboarding',
   STORAGE_VERSION: 'buddychat_version',
-  API_KEYS: 'buddychat_apiKeys' // Added for secure API key storage
+  API_KEYS: 'buddychat_apiKeys', // Added for secure API key storage
+  CONVERSATIONS: 'buddychat_conversations',
+  CONVERSATION_DATA: 'buddychat_conversationData'
 };
 
 // Maximum sizes in bytes (approximate)
